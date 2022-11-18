@@ -1,5 +1,3 @@
-'use strict';
-
 /* Listinnehåll */
 const bookList = [
     {
@@ -11,6 +9,11 @@ const bookList = [
         id:2,
         author: 'William Shakespear',
         title: 'Hamlet'
+    },
+    {
+        id:3,
+        author: 'Douglas Adams',
+        title: 'Hitchhikers Guide to the Galaxy'
     }
 ];
 
@@ -47,6 +50,19 @@ function searchBooks(searchTerm) {
 }
 
 /* Element i html-listan visas/döljs beroende på innehåll */
-function renderBookList(list) {
-    console.log(list)
+function renderBookList(bookList) {
+
+    BookList(bookList);
+
+    const existingElement = document.querySelector('.book-list');
+    const root = document.getElementById('root');
+    
+    if (existingElement) {
+        root.removeChild(existingElement);
+    }
+
+    if (bookList.length > 0) { 
+        root.insertAdjacentHTML('beforeend', BookList(bookList))
+    }
+
 }
