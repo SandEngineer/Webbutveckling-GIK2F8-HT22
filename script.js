@@ -1,7 +1,6 @@
 'use strict';
 
 /* Listinnehåll */
-const searchInput = null;
 const bookList = [
     {
         id:1,
@@ -15,12 +14,17 @@ const bookList = [
     }
 ];
 
+/* Hämta sökfältstermer */
+const searchField = document.getElementById('searchField');
+
+searchField.addEventListener("keyup", handleKeyPress);
+
 /* Ta emot/läsa av inputvärde i fältet
 Skicka värdet till searchBooks
 searchBooks returnerar filtrerad lista
 Listan skickas till renderBookList */
-function handleKeyPress(input) {
-    searchBooks(input);
+function handleKeyPress(e) {
+    searchBooks(e.target.value);
 }
 
 /* Loopar igenom bookList
@@ -33,9 +37,8 @@ function searchBooks(searchTerm) {
     for (let i = 0; i < bookList.length; i++) {
         const title = bookList[i].title.toLowerCase();
         const author = bookList[i].author.toLowerCase();
-        
-        if ((title.indexOf(searchTerm.toLowerCase()) >> 0) || (author.indexOf(searchTerm.toLowerCase()) >> 0)) {
-            console.log('match?');
+
+        if ((title.indexOf(searchTerm.toLowerCase()) >= 0) || (author.indexOf(searchTerm.toLowerCase()) >= 0)) {
             filteredList.push(bookList[i]);
         }
     }
@@ -47,5 +50,3 @@ function searchBooks(searchTerm) {
 function renderBookList(list) {
     console.log(list)
 }
-
-handleKeyPress('wi');
